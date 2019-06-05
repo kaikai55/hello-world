@@ -1,0 +1,32 @@
+<script>
+    var s = "5>>2;4.171;2;24;3122.39338N;12154.9006E;5.017;158;22.6;"
+
+    console.log(prase(s))
+
+    function prase(a) {
+        var n, e
+        a.split(";").forEach(v => {
+            if (v.indexOf("N") != -1) {
+                n = v.replace("N", "")
+            } else if (v.indexOf("E") != -1) {
+                e = v.replace("E", "")
+            }
+        })
+        return {
+            n: trans(n),
+            e: trans(e)
+        }
+    }
+
+    function trans(n) {
+        var n1, n2
+        if (n.split(".")[0].length >= 5) {
+            n1 = n.substring(0, 3)
+            n2 = n.substring(3, n.length)
+        } else {
+            n1 = n.substring(0, 2)
+            n2 = n.substring(2, n.length)
+        }
+        return parseInt(n1) + n2 / 60
+    }
+</script>
